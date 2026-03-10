@@ -256,6 +256,20 @@
                                 height: 0 !important;
                             }
 
+                            /* FONT OVERRIDE - Forzar Poppins en todos los elementos del chatbot */
+                            flowise-chatbot *,
+                            flowise-chatbot,
+                            .chatbot-container *,
+                            .chatbot-container,
+                            [data-testid*="chat"] *,
+                            [data-testid*="chat"],
+                            .chat-window *,
+                            .chat-window,
+                            .bubble-chat *,
+                            .bubble-chat {
+                                font-family: 'Poppins', sans-serif !important;
+                            }
+
                             /* Contenedor específico del input */
                             .chatbot-container .w-full.px-5.pt-2.pb-1 {
                                 border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
@@ -264,16 +278,17 @@
                                 background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05)) !important;
                                 backdrop-filter: blur(20px) saturate(180%) !important;
                                 -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                                font-family: 'Poppins', sans-serif !important;
                             }
 
-                            /* Campo de entrada - Liquid Glass */
+                            /* Campo de entrada - Liquid Glass (tono oscuro) */
                             .chatbot-input {
                                 border-radius: 24px !important;
                                 margin: 10px !important;
                                 background: linear-gradient(135deg, 
-                                    rgba(255, 255, 255, 0.15) 0%, 
-                                    rgba(255, 255, 255, 0.08) 50%, 
-                                    rgba(255, 255, 255, 0.12) 100%) !important;
+                                    rgba(0, 0, 0, 0.5) 0%, 
+                                    rgba(0, 0, 0, 0.52) 50%, 
+                                    rgba(0, 0, 0, 0.56) 100%) !important;
                                 backdrop-filter: blur(25px) saturate(200%) brightness(1.1) !important;
                                 -webkit-backdrop-filter: blur(25px) saturate(200%) brightness(1.1) !important;
                                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
@@ -287,6 +302,45 @@
                                 scrollbar-width: none !important;
                                 -ms-overflow-style: none !important;
                                 position: relative !important;
+                                font-family: 'Poppins', sans-serif !important;
+                                transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+                            }
+
+                            /* Placeholder blanco */
+                            .chatbot-input textarea::placeholder {
+                                color: rgba(255, 255, 255, 0.8) !important;
+                            }
+
+                            /* Selector específico para diferentes implementaciones del botón - EXCLUYENDO BOTÓN DE ENVÍO */
+                            .bubble-button:not(.flowise-chat-input-send-button),
+                            .chat-button:not(.flowise-chat-input-send-button),
+                            .chatbot-button:not(.flowise-chat-input-send-button),
+                            button[data-testid*="bubble"]:not([data-testid*="send"]),
+                            button[aria-label*="chat"]:not([aria-label*="send"]),
+                            div[role="button"]:not(.flowise-chat-input-send-button) {
+                                display: flex !important;
+                                visibility: visible !important;
+                                opacity: 1 !important;
+                                pointer-events: auto !important;
+                            }
+
+                            /* Estados del input con animaciones */
+                            .chatbot-input:hover {
+                                border-color: ${config.themeUserMessageBackgroundColor}99 !important;
+                                box-shadow: 
+                                    0 16px 50px rgba(0, 0, 0, 0.2),
+                                    0 0 0 2px ${config.themeUserMessageBackgroundColor}66,
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+                                transform: translateY(-1px) !important;
+                            }
+
+                            .chatbot-input:focus-within {
+                                border-color: ${config.themeUserMessageBackgroundColor}CC !important;
+                                box-shadow: 
+                                    0 20px 60px rgba(0, 0, 0, 0.25),
+                                    0 0 0 3px ${config.themeUserMessageBackgroundColor}80,
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+                                transform: translateY(-2px) !important;
                             }
 
                             /* Efecto de brillo dinámico */
@@ -305,24 +359,6 @@
                                 z-index: 1 !important;
                             }
 
-                            .chatbot-input:hover {
-                                border-color: rgba(245, 245, 245, 0.6) !important;
-                                box-shadow: 
-                                    0 16px 50px rgba(0, 0, 0, 0.2),
-                                    0 0 0 2px rgba(252, 248, 232, 0.5),
-                                    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
-                                transform: translateY(-1px) !important;
-                            }
-
-                            .chatbot-input:focus-within {
-                                border-color: rgba(255, 255, 255, 0.8) !important;
-                                box-shadow: 
-                                    0 20px 60px rgba(0, 0, 0, 0.25),
-                                    0 0 0 3px rgba(252, 248, 232, 0.5),
-                                    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
-                                transform: translateY(-2px) !important;
-                            }
-
                             .chatbot-input:hover::before {
                                 left: 100% !important;
                             }
@@ -339,36 +375,75 @@
                                 background: transparent !important;
                                 position: relative !important;
                                 z-index: 2 !important;
+                                font-family: 'Poppins', sans-serif !important;
                             }
 
                             .chatbot-input textarea::-webkit-scrollbar {
                                 display: none !important;
                             }
 
-                            /* Burbujas de mensaje del bot */
+                            /* Burbujas de mensaje del bot - Liquid Glass oscuro */
                             .chatbot-host-bubble {
                                 border-radius: 20px !important;
                                 padding: 12px 16px !important;
                                 max-width: 85% !important;
                                 margin-bottom: 8px !important;
-                                background-color: rgba(248, 248, 250, 0) !important;
-                                backdrop-filter: blur(10px) !important;
-                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.36) !important;
+                                background: linear-gradient(135deg, 
+                                    rgba(0, 0, 0, 0.45) 0%, 
+                                    rgba(0, 0, 0, 0.48) 50%, 
+                                    rgba(0, 0, 0, 0.52) 100%) !important;
+                                backdrop-filter: blur(25px) saturate(180%) brightness(1.05) !important;
+                                -webkit-backdrop-filter: blur(25px) saturate(180%) brightness(1.05) !important;
+                                box-shadow: 
+                                    0 8px 32px rgba(0, 0, 0, 0.15),
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                                    0 0 0 0.5px rgba(255, 255, 255, 0.1) !important;
                                 color: white !important;
-                                border: 1px solid rgba(255, 255, 255, 0) !important;
+                                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                                font-family: 'Poppins', sans-serif !important;
+                                position: relative !important;
+                                overflow: hidden !important;
+                                transition: transform 0.2s ease, box-shadow 0.2s ease !important;
                             }
 
-                            /* Burbujas de mensaje del usuario */
+                            .chatbot-host-bubble:hover {
+                                transform: translateY(-1px) !important;
+                                box-shadow: 
+                                    0 12px 40px rgba(0, 0, 0, 0.2),
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                                    0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+                            }
+
+                            /* Burbujas de mensaje del usuario - Liquid Glass con color */
                             .chatbot-guest-bubble {
                                 border-radius: 20px !important;
                                 padding: 12px 16px !important;
                                 max-width: 85% !important;
                                 margin-bottom: 8px !important;
-                                background-color: rgba(248, 248, 250, 0) !important;
-                                backdrop-filter: blur(10px) !important;
+                                background: linear-gradient(135deg, 
+                                    ${config.themeUserMessageBackgroundColor}E6 0%, 
+                                    ${config.themeUserMessageBackgroundColor}F0 50%, 
+                                    ${config.themeUserMessageBackgroundColor}FA 100%) !important;
+                                backdrop-filter: blur(25px) saturate(180%) !important;
+                                -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
                                 color: white !important;
-                                box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-                                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                                box-shadow: 
+                                    0 8px 32px rgba(0, 0, 0, 0.15),
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                                    0 0 0 0.5px rgba(255, 255, 255, 0.1) !important;
+                                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                                font-family: 'Poppins', sans-serif !important;
+                                position: relative !important;
+                                overflow: hidden !important;
+                                transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+                            }
+
+                            .chatbot-guest-bubble:hover {
+                                transform: translateY(-1px) !important;
+                                box-shadow: 
+                                    0 12px 40px rgba(0, 0, 0, 0.2),
+                                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                                    0 0 0 1px rgba(255, 255, 255, 0.2) !important;
                             }
 
                             /* Contenedor del chat */
@@ -379,12 +454,52 @@
                                 background-color: rgba(0, 0, 0, 0.1) !important;
                                 backdrop-filter: blur(15px) !important;
                                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                                font-family: 'Poppins', sans-serif !important;
                             }
 
-                            /* Scroll suave */
+                            /* Contenedor de mensajes sin scroll suave */
                             .chat-messages-container {
-                                scroll-behavior: smooth !important;
+                                scroll-behavior: auto !important;
                                 background-color: transparent !important;
+                                font-family: 'Poppins', sans-serif !important;
+                            }
+
+                            /* Reglas adicionales para garantizar Poppins en todos los elementos */
+                            .flowise-fullchatbot *,
+                            .flowise-fullchatbot,
+                            [data-modal="chatbot"] *,
+                            [data-modal="chatbot"],
+                            .chat-bubble *,
+                            .chat-bubble,
+                            .chat-input *,
+                            .chat-input,
+                            [role="dialog"] *,
+                            [role="dialog"],
+                            .chatbot-widget *,
+                            .chatbot-widget {
+                                font-family: 'Poppins', sans-serif !important;
+                            }
+
+                            /* Mensajes específicos */
+                            [data-testid*="message"] *,
+                            [data-testid*="message"],
+                            .message-content *,
+                            .message-content,
+                            .bot-message *,
+                            .bot-message,
+                            .user-message *,
+                            .user-message {
+                                font-family: 'Poppins', sans-serif !important;
+                            }
+
+                            /* Botones y elementos de interfaz */
+                            [data-testid*="button"] *,
+                            [data-testid*="button"],
+                            .send-button *,
+                            .send-button,
+                            .attachment-button *,
+                            .attachment-button {
+                                font-family: 'Poppins', sans-serif !important;
                             }
                         `,
                         chatWindow: {
